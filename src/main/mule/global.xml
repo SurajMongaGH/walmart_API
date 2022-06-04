@@ -24,17 +24,17 @@ http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/m
 	<configuration doc:name="Configuration" doc:id="e0724bdc-c70c-47b2-a516-57a0bf913588" defaultErrorHandler-ref="globalError_Handler" />
 	<api-gateway:autodiscovery apiId="17864968" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="04e72880-8607-45ab-a21b-7d03767fd01b" flowRef="walmart-api-main" />
 	<error-handler name="globalError_Handler" doc:id="e28cbf0a-b460-4c42-a891-b48e72790283" >
-		<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="b386e7be-0186-4964-975c-97355eee1ad4" >
-			<ee:transform doc:name="Transform Message" doc:id="cb212e3c-0958-492b-bc74-a281193f2c59">
-				<ee:message>
-					<ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-	"Message": error.description
-}]]></ee:set-payload>
-				</ee:message>
-			</ee:transform>
+		<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="842aa59f-eec9-4029-9c28-ffa1a05a1981" type="DB:BAD_SQL_SYNTAX, DB:CONNECTIVITY, DB:QUERY_EXECUTION">
+			<set-payload value="Database connection issue" doc:name="Set Payload" doc:id="cad5b13b-f3e0-4675-8322-e160ad847bf4" />
+			<set-variable value="500" doc:name="Set Variable" doc:id="c93107f4-bd81-410c-ac38-f02508685c5b" variableName="httpStatus"/>
+		</on-error-continue>
+		<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="b386e7be-0186-4964-975c-97355eee1ad4" type="HTTP:BAD_GATEWAY, HTTP:BAD_REQUEST, HTTP:CLIENT_SECURITY, HTTP:CONNECTIVITY, HTTP:FORBIDDEN, HTTP:INTERNAL_SERVER_ERROR, HTTP:METHOD_NOT_ALLOWED, HTTP:NOT_ACCEPTABLE, HTTP:NOT_FOUND, HTTP:PARSING, HTTP:RETRY_EXHAUSTED, HTTP:SECURITY, HTTP:SERVICE_UNAVAILABLE, HTTP:TIMEOUT, HTTP:TOO_MANY_REQUESTS, HTTP:UNAUTHORIZED, HTTP:UNSUPPORTED_MEDIA_TYPE">
+			<set-payload value="HTTP request error" doc:name="Set Payload" doc:id="664e5994-ab3e-4be6-9cd5-4b376cb27c81" />
+			<set-variable value="500" doc:name="Set Variable" doc:id="cd353c1b-64a5-4af9-99bf-ba8fb4c9a27d" variableName="httpStatus"/>
+		</on-error-continue>
+		<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="da2f648d-60bb-4fba-a92f-85dc7791feeb" >
+			<set-payload value="Internal server error" doc:name="Set Payload" doc:id="aa68ef8a-ebbf-4e4d-aa6f-9f6f9c2c916a" />
+			<set-variable value="500" doc:name="Set Variable" doc:id="d6e5ab5a-d701-474f-8cc2-c17306dde6fa" variableName="httpStatus"/>
 		</on-error-continue>
 	</error-handler>
 </mule>

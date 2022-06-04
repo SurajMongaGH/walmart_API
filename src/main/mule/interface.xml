@@ -12,7 +12,7 @@
                 <http:headers>#[vars.outboundHeaders default {}]</http:headers>
             </http:error-response>
         </http:listener>
-        <apikit:router config-ref="walmart-api-config" />
+        <apikit:router config-ref="walmart-api-config" doc:id="3974c1ae-4691-4f5b-8c31-8025ba246019"/>
         <error-handler>
             <on-error-propagate type="APIKIT:BAD_REQUEST">
                 <ee:transform>
@@ -104,7 +104,7 @@ output application/json
                 <http:headers>#[vars.outboundHeaders default {}]</http:headers>
             </http:error-response>
         </http:listener>
-        <apikit:console config-ref="walmart-api-config" />
+        <apikit:console config-ref="walmart-api-config" doc:id="4a070940-0ee9-4621-85e0-04dc3478f5f6"/>
         <error-handler>
             <on-error-propagate type="APIKIT:NOT_FOUND">
                 <ee:transform>

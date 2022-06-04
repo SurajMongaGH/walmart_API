@@ -62,7 +62,11 @@ output application/json
 			</ee:message>
 		</ee:transform>
 		<logger level="INFO" doc:name="EndLog" doc:id="05647243-5807-40bf-9329-082a39eef299" message="#[payload]"/>
-	</flow>
+		<error-handler >
+			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="4bd4a606-a529-4016-b2f3-7a961eed660a" type="HTTP:BAD_GATEWAY, HTTP:BAD_REQUEST, HTTP:CLIENT_SECURITY, HTTP:CONNECTIVITY, HTTP:FORBIDDEN, HTTP:INTERNAL_SERVER_ERROR, HTTP:METHOD_NOT_ALLOWED, HTTP:NOT_ACCEPTABLE, HTTP:NOT_FOUND, HTTP:PARSING, HTTP:RETRY_EXHAUSTED, HTTP:SECURITY, HTTP:SERVICE_UNAVAILABLE, HTTP:TIMEOUT, HTTP:TOO_MANY_REQUESTS, HTTP:UNAUTHORIZED, HTTP:UNSUPPORTED_MEDIA_TYPE"/>
+		</error-handler>
+	
+</flow>
 	<flow name="productDetailsFlow" doc:id="9924c4c4-313d-4582-a289-06a76495b089" >
 		<http:request method="GET" doc:name="Request" doc:id="648a1480-3a4f-43b5-9e4a-b075aba4d15b" config-ref="HTTP_Request_configuration" path="/products/v3/get-details">
 			<http:headers ><![CDATA[#[output application/java

@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="interface-suite.xml" />
+	<munit:test name="APIKIT:BAD_REQUEST" doc:id="97449d4d-dac4-44a6-8cb7-ec085c5c9114" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="APIKIT:BAD_REQUEST" doc:id="2be9678b-6ae5-4b02-86d5-e1049a4511cb" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="3974c1ae-4691-4f5b-8c31-8025ba246019" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:BAD_REQUEST" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://walmartapimaintest\mock_variable_.dwl')]" />
+						<munit-tools:variable key="InputPayload" value="#[output application/json --- readUrl('classpath://walmartapimaintest\mock_variable_1.dwl')]" mediaType="application/json" encoding="UTF-8" />
+						<munit-tools:variable key="httpStatus" value="#[readUrl('classpath://walmartapimaintest\mock_variable_2.dwl')]" />
+						<munit-tools:variable key="NearestStore" value="#[output application/json --- readUrl('classpath://walmartapimaintest\mock_variable_3.dwl')]" mediaType="application/json" encoding="UTF-8" />
+						<munit-tools:variable key="prodTypeId" value="#[output application/json --- readUrl('classpath://walmartapimaintest\mock_variable_4.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="1a79739d-5946-4d9b-a3c0-8bc4c7177a27" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://walmartapimaintest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://walmartapimaintest\set-event_attributes.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<try doc:name="Try" doc:id="b56acb43-cfd2-4529-8109-97dd7ca63367" >
+				<flow-ref doc:name="Flow-ref to walmart-api-main" doc:id="4260dac0-e57b-41d6-9099-2d69edac949e" name="walmart-api-main" />
+				<error-handler >
+					<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="93d7e8c2-6975-4030-b7ca-9097e2ae8a3d" >
+						<logger level="INFO" doc:name="Logger" doc:id="41f8f93d-e9cb-4d00-ae40-72f2c6e4c8d3" message="APIKIT:BAD_REQUEST"/>
+					</on-error-continue>
+				</error-handler>
+			</try>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="0e9dcf4d-60c6-4d07-b5f7-5d95e7f22407" expression="#[payload.message]" is='#[MunitTools::equalTo("Bad request")]'/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="APIKIT:NOT_FOUND" doc:id="7ce0e422-2501-41bf-9c59-f8b2a3e0455d" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="APIKIT:NOT_FOUND" doc:id="fe8a3736-4980-4a18-8bd3-16b51f2df903" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="3974c1ae-4691-4f5b-8c31-8025ba246019" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://walmartapimaintest\mock_variable_.dwl')]" />
+						<munit-tools:variable key="InputPayload" value="#[output application/json --- readUrl('classpath://walmartapimaintest\mock_variable_1.dwl')]" mediaType="application/json" encoding="UTF-8" />
+						<munit-tools:variable key="httpStatus" value="#[readUrl('classpath://walmartapimaintest\mock_variable_2.dwl')]" />
+						<munit-tools:variable key="NearestStore" value="#[output application/json --- readUrl('classpath://walmartapimaintest\mock_variable_3.dwl')]" mediaType="application/json" encoding="UTF-8" />
+						<munit-tools:variable key="prodTypeId" value="#[output application/json --- readUrl('classpath://walmartapimaintest\mock_variable_4.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="3df7db34-b591-4993-bdba-37a80ea8acc5" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://walmartapimaintest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://walmartapimaintest\set-event_attributes.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<try doc:name="Try" doc:id="c8cc0c89-9b61-49a0-bac9-38d0386bf19f" >
+				<flow-ref doc:name="APIKIT:NOT_FOUND" doc:id="c00512b8-3efe-4690-b79a-11034f645bff" name="walmart-api-main" />
+				<error-handler >
+					<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="cb6ddcb4-0f38-497c-8494-f82df40cce0d" >
+						<logger level="INFO" doc:name="Logger" doc:id="7ee3d326-38cb-44c7-9839-56c6f1be61f8" message="APIKIT:NOT_FOUND" />
+					</on-error-continue>
+				</error-handler>
+			</try>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="68855a9a-16aa-48fe-ba49-f607bdd0d3d1" expression="#[payload.message]" is='#[MunitTools::equalTo("Resource not found")]' />
+		</munit:validation>
+	</munit:test>
+	<munit:test name="APIKIT:METHOD_NOT_ALLOWED" doc:id="2fc0ed1e-c991-465e-b4ea-abd0fee34881" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="APIKIT:METHOD_NOT_ALLOWED" doc:id="213f3537-5247-42ce-bd6d-fc30e7dbb022" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="3974c1ae-4691-4f5b-8c31-8025ba246019" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:METHOD_NOT_ALLOWED" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://walmartapimaintest\mock_variable_.dwl')]" />
+						<munit-tools:variable key="InputPayload" value="#[output application/json --- readUrl('classpath://walmartapimaintest\mock_variable_1.dwl')]" mediaType="application/json" encoding="UTF-8" />
+						<munit-tools:variable key="httpStatus" value="#[readUrl('classpath://walmartapimaintest\mock_variable_2.dwl')]" />
+						<munit-tools:variable key="NearestStore" value="#[output application/json --- readUrl('classpath://walmartapimaintest\mock_variable_3.dwl')]" mediaType="application/json" encoding="UTF-8" />
+						<munit-tools:variable key="prodTypeId" value="#[output application/json --- readUrl('classpath://walmartapimaintest\mock_variable_4.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="6423904f-3130-45ba-87b6-cd82b4a876b8" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://walmartapimaintest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://walmartapimaintest\set-event_attributes.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<try doc:name="Try" doc:id="da9e5a3e-ce9a-46ca-b771-ae48a127a42f" >
+				<flow-ref doc:name="APIKIT:METHOD_NOT_ALLOWED" doc:id="d5412e44-5307-4903-af87-6be7964f8894" name="walmart-api-main" />
+				<error-handler >
+					<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="bb8780be-73a4-43a7-8cbf-1167a5264dc2" >
+						<logger level="INFO" doc:name="Logger" doc:id="c096d3a8-ed5a-4bf8-bbfb-3d1b49df1dc6" message="APIKIT:METHOD_NOT_ALLOWED" />
+					</on-error-continue>
+				</error-handler>
+			</try>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="4df948dc-a9dc-4c1c-9e4e-b6dedc797f6e" expression="#[payload.message]" is='#[MunitTools::equalTo("Method not allowed")]' />
+		</munit:validation>
+	</munit:test>
+	<munit:test name="APIKIT:NOT_ACCEPTABLE" doc:id="4f5aebbd-bc68-4efd-8050-f5af67e83961" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="APIKIT:NOT_ACCEPTABLE" doc:id="adfe8125-dc2b-4c30-bfcc-615b8c6ab679" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="3974c1ae-4691-4f5b-8c31-8025ba246019" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_ACCEPTABLE" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://walmartapimaintest\mock_variable_.dwl')]" />
+						<munit-tools:variable key="InputPayload" value="#[output application/json --- readUrl('classpath://walmartapimaintest\mock_variable_1.dwl')]" mediaType="application/json" encoding="UTF-8" />
+						<munit-tools:variable key="httpStatus" value="#[readUrl('classpath://walmartapimaintest\mock_variable_2.dwl')]" />
+						<munit-tools:variable key="NearestStore" value="#[output application/json --- readUrl('classpath://walmartapimaintest\mock_variable_3.dwl')]" mediaType="application/json" encoding="UTF-8" />
+						<munit-tools:variable key="prodTypeId" value="#[output application/json --- readUrl('classpath://walmartapimaintest\mock_variable_4.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="f61a4a23-b743-4a56-ac10-29027c9eab75" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://walmartapimaintest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://walmartapimaintest\set-event_attributes.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<try doc:name="Try" doc:id="fd8ff292-dfc6-4715-9da0-fba5e8afe15d" >
+				<flow-ref doc:name="APIKIT:NOT_ACCEPTABLE" doc:id="c8bb0baf-9fb2-4d8f-be48-220de9f0ea56" name="walmart-api-main" />
+				<error-handler >
+					<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="0a5f171c-6a35-47d3-95c7-7eac6492ef30" >
+						<logger level="INFO" doc:name="Logger" doc:id="2e7ba753-b582-4243-95bc-542de5d5c5fe" message="APIKIT:NOT_ACCEPTABLE" />
+					</on-error-continue>
+				</error-handler>
+			</try>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="3ff03de2-0257-4e49-b168-578a6c1fb0ed" expression="#[payload.message]" is='#[MunitTools::equalTo("Not acceptable")]' />
+		</munit:validation>
+	</munit:test>
+	<munit:test name="APIKIT:UNSUPPORTED_MEDIA_TYPE" doc:id="3e0e99df-f856-415c-b40c-137938a1999f" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="APIKIT:UNSUPPORTED_MEDIA_TYPE" doc:id="6ad3bc2b-ca29-44f1-9080-35a9f5b2db96" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="3974c1ae-4691-4f5b-8c31-8025ba246019" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:UNSUPPORTED_MEDIA_TYPE" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://walmartapimaintest\mock_variable_.dwl')]" />
+						<munit-tools:variable key="InputPayload" value="#[output application/json --- readUrl('classpath://walmartapimaintest\mock_variable_1.dwl')]" mediaType="application/json" encoding="UTF-8" />
+						<munit-tools:variable key="httpStatus" value="#[readUrl('classpath://walmartapimaintest\mock_variable_2.dwl')]" />
+						<munit-tools:variable key="NearestStore" value="#[output application/json --- readUrl('classpath://walmartapimaintest\mock_variable_3.dwl')]" mediaType="application/json" encoding="UTF-8" />
+						<munit-tools:variable key="prodTypeId" value="#[output application/json --- readUrl('classpath://walmartapimaintest\mock_variable_4.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="abf68b5c-278c-4208-895a-35e4c6a9fec0" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://walmartapimaintest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://walmartapimaintest\set-event_attributes.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<try doc:name="Try" doc:id="a89d34fb-8631-4731-b8ca-29d727da7db5" >
+				<flow-ref doc:name="APIKIT:UNSUPPORTED_MEDIA_TYPE" doc:id="7c9af67f-ec2d-425b-baf8-3f064cd38560" name="walmart-api-main" />
+				<error-handler >
+					<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="9ec1a16f-95b1-4bf7-95df-53360e69395c" >
+						<logger level="INFO" doc:name="Logger" doc:id="ea6b094c-4ad8-4333-9531-ca416e0750f9" message="APIKIT:UNSUPPORTED_MEDIA_TYPE" />
+					</on-error-continue>
+				</error-handler>
+			</try>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="d71bf3d9-e81c-4e4b-bab3-e7688d26882a" expression="#[payload.message]" is='#[MunitTools::equalTo("Unsupported media type")]' />
+		</munit:validation>
+	</munit:test>
+	<munit:test name="APIKIT:NOT_IMPLEMENTED" doc:id="80c55b6c-154b-4253-bc81-06272ae43cc0" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="APIKIT:NOT_IMPLEMENTED" doc:id="67393b6b-6c61-47ff-9d87-7d92e11c861f" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="3974c1ae-4691-4f5b-8c31-8025ba246019" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_IMPLEMENTED" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://walmartapimaintest\mock_variable_.dwl')]" />
+						<munit-tools:variable key="InputPayload" value="#[output application/json --- readUrl('classpath://walmartapimaintest\mock_variable_1.dwl')]" mediaType="application/json" encoding="UTF-8" />
+						<munit-tools:variable key="httpStatus" value="#[readUrl('classpath://walmartapimaintest\mock_variable_2.dwl')]" />
+						<munit-tools:variable key="NearestStore" value="#[output application/json --- readUrl('classpath://walmartapimaintest\mock_variable_3.dwl')]" mediaType="application/json" encoding="UTF-8" />
+						<munit-tools:variable key="prodTypeId" value="#[output application/json --- readUrl('classpath://walmartapimaintest\mock_variable_4.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="644cd54c-b5e7-4f2d-8636-e91d82c54012" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://walmartapimaintest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://walmartapimaintest\set-event_attributes.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<try doc:name="Try" doc:id="9946d32a-bff5-4ffb-89eb-fa9c79e19afa" >
+				<flow-ref doc:name="APIKIT:NOT_IMPLEMENTED" doc:id="2f36674d-0d00-4953-8528-ac3c2edfb134" name="walmart-api-main" />
+				<error-handler >
+					<on-error-continue enableNotifications="true" logException="true" doc:name="APIKIT:NOT_IMPLEMENTED" doc:id="871c4956-30a7-43f5-b423-348029394971" >
+						<logger level="INFO" doc:name="Logger" doc:id="eb63432d-40ec-455b-a841-e9b69fd53a60" message="APIKIT:NOT_IMPLEMENTED" />
+					</on-error-continue>
+				</error-handler>
+			</try>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="APIKIT:NOT_IMPLEMENTED" doc:id="9615ea61-9615-4389-8201-01e764a13339" expression="#[payload.message]" is='#[MunitTools::equalTo("Not Implemented")]' />
+		</munit:validation>
+	</munit:test>
+	<munit:test name="ResourceNotFound" doc:id="35b0ffeb-4ead-400a-b68c-445db92cfe07" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="APIKIT:NOT_FOUND" doc:id="748036ae-08eb-48e4-9e63-e8c6ab7b8844" processor="apikit:console">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="4a070940-0ee9-4621-85e0-04dc3478f5f6" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://walmartapiconsoletest\mock_variable_.dwl')]" />
+						<munit-tools:variable key="httpStatus" value="#[readUrl('classpath://walmartapiconsoletest\mock_variable_1.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="493960e9-998a-4625-95b5-2db5e3f314be" >
+				<munit:payload value="#[readUrl('classpath://walmartapiconsoletest\set-event_payload.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://walmartapiconsoletest\set-event_attributes.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<try doc:name="Try" doc:id="b436a2f4-3114-4454-9752-f8961870c236" >
+				<flow-ref doc:name="Flow-ref to walmart-api-console" doc:id="4d522f3e-56cd-4363-bedc-b3fac11c7742" name="walmart-api-console" />
+				<error-handler >
+					<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="d36c712c-4f6c-4d14-b598-b6b69ffc793f" >
+						<logger level="INFO" doc:name="Logger" doc:id="f3e6084b-8f97-4a3b-8c8d-45667b7bf4a6" message="Resource not found"/>
+					</on-error-continue>
+				</error-handler>
+			</try>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="96adc861-ead2-4101-b3a7-46016046e4d5" is='#[MunitTools::equalTo("Resource not found")]' expression="#[payload.message]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="post:\order:application\json:walmart-api-config-test" doc:id="6d81a94d-0423-4cac-b097-21b1bd48b0fc" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock order" doc:id="49f421f5-d8c5-4cf3-ac35-23668eed4e00" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="63ffc463-365d-4d89-bb09-c687fab2dd6c" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://postorderapplicationjsonwalmartapiconfigtest\mock_payload.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://postorderapplicationjsonwalmartapiconfigtest\mock_variable_.dwl')]" />
+						<munit-tools:variable key="InputPayload" value="#[output application/json --- readUrl('classpath://postorderapplicationjsonwalmartapiconfigtest\mock_variable_1.dwl')]" mediaType="application/json" encoding="UTF-8" />
+						<munit-tools:variable key="NearestStore" value="#[output application/json --- readUrl('classpath://postorderapplicationjsonwalmartapiconfigtest\mock_variable_2.dwl')]" mediaType="application/json" encoding="UTF-8" />
+						<munit-tools:variable key="prodTypeId" value="#[output application/json --- readUrl('classpath://postorderapplicationjsonwalmartapiconfigtest\mock_variable_3.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="d7503f1c-2dde-4319-ac2a-a08c55948e31" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://postorderapplicationjsonwalmartapiconfigtest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://postorderapplicationjsonwalmartapiconfigtest\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://postorderapplicationjsonwalmartapiconfigtest\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to post:\order:application\json:walmart-api-config" doc:id="151cfdbb-45f5-4caf-9516-e1d2ef8a19c2" name="post:\order:application\json:walmart-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="40a9f731-f6f2-4681-9ea2-367665c377c3" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import postorderapplicationjsonwalmartapiconfigtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
