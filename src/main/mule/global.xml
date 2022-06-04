@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
-	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
-	xmlns:http="http://www.mulesoft.org/schema/mule/http"
-	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+<mule xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
 http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
-http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
 	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="bd1568ed-d4e9-48be-a55b-dc6a354ea6de" basePath="/${walmart.basepath}" >
 		<http:request-connection host="${walmart.host}" port="${walmart.port}" protocol="HTTPS"/>
 	</http:request-config>
@@ -21,11 +22,12 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 		<db:my-sql-connection host="${db.host}" port="${db.port}" user="${db.user}" password="${db.password}" database="${db.database}" />
 	</db:config>
 	<configuration doc:name="Configuration" doc:id="e0724bdc-c70c-47b2-a516-57a0bf913588" defaultErrorHandler-ref="globalError_Handler" />
+	<api-gateway:autodiscovery apiId="17864968" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="04e72880-8607-45ab-a21b-7d03767fd01b" flowRef="walmart-api-main" />
 	<error-handler name="globalError_Handler" doc:id="e28cbf0a-b460-4c42-a891-b48e72790283" >
-		<on-error-propagate enableNotifications="true" logException="true" doc:name="Copy_of_On Error Propagate" doc:id="763a18c3-866e-4af6-987c-766268bbf218" type="ANY" >
-			<ee:transform doc:name="Transform Message" doc:id="cb212e3c-0958-492b-bc74-a281193f2c59" >
-				<ee:message >
-					<ee:set-payload ><![CDATA[%dw 2.0
+		<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="b386e7be-0186-4964-975c-97355eee1ad4" >
+			<ee:transform doc:name="Transform Message" doc:id="cb212e3c-0958-492b-bc74-a281193f2c59">
+				<ee:message>
+					<ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
 {
@@ -33,6 +35,6 @@ output application/json
 }]]></ee:set-payload>
 				</ee:message>
 			</ee:transform>
-		</on-error-propagate>
+		</on-error-continue>
 	</error-handler>
 </mule>
