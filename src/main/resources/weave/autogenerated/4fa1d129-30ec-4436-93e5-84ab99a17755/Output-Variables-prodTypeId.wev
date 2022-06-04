@@ -1,0 +1,4 @@
+%dw 2.0
+
+type auto_4fa1d129_30ec_4436_93e5_84ab99a17755_Output_Variables_prodTypeId = Any
+

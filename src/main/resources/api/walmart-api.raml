@@ -1,0 +1,28 @@
+#%RAML 1.0
+title: walmart-API
+protocols:
+  - HTTP
+
+traits:
+  KeyHostRequired: !include Traits/traitTypes.raml
+
+/order:
+  is:
+    - KeyHostRequired
+  post:
+    description: fetch order details and get nearest store
+    body:
+      application/json:
+        type: !include DataType/dataType.raml
+        example: !include Examples/orderRequest.json
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/orderResponse.json
+              
+          
+  
+  
+
+  
