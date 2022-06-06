@@ -2,17 +2,17 @@ http:
   port: "8081"
 
 walmart:
-  host: "walmart.p.rapidapi.com"
-  port: "443"
-  protocol: "HTTPS"
+  host: "![Ice29R5BakM2MLoKEW8OEmN1/VKwUhUvZc7cAFqVeYw=]"
+  port: "![Gvj0O4ad4VG9Hjo4FepdlQ==]"
+  protocol: "![hIV5C0UIkr8oIfCTCyNL+A==]"
   basepath: "/"
-  RapidapiHost: "walmart.p.rapidapi.com"
-  RapidapiKey: "3023a67861msh0eb707c9fd31682p12e9c9jsn4bd95787f3d4"
+  RapidapiHost: "![Ice29R5BakM2MLoKEW8OEmN1/VKwUhUvZc7cAFqVeYw=]"
+  RapidapiKey: "![ULyGPvoudwN5tZnlOThobpmX+McXYAkVDbhBvBI17CSh4ILJalQvmX7zb5ScqfhaAs6mHQo7pm27LeUfJzZ29g==]"
   
 db:
- user: "c4ebatch5"
- password: "c4ebatch@5"
- database: "testdbc45"
- host: "db4free.net"
- port: "3306"
+ user: "![NcDfiv3a3x3PnwUAUkHZNA==]"
+ password: "![3QCrYLPD1tiWTfkesetdaA==]"
+ database: "![RjT8FSadL/t/BpkLs6dEWg==]"
+ host: "![rmDpUC/qvPz8J45m0Yz4hQ==]"
+ port: "![2OTI5QN1ch5FRRwIPEAX0A==]"
  

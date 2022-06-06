@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway"
-	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
-	xmlns:db="http://www.mulesoft.org/schema/mule/db"
-	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+<mule xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+	xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
 http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
-http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd">
 	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="bd1568ed-d4e9-48be-a55b-dc6a354ea6de" basePath="/${walmart.basepath}" >
-		<http:request-connection host="${walmart.host}" port="${walmart.port}" protocol="HTTPS"/>
+		<http:request-connection host="${secure::walmart.host}" port="${secure::walmart.port}" protocol="HTTPS"/>
 	</http:request-config>
 	<http:listener-config name="walmart-api-httpListenerConfig">
         <http:listener-connection host="0.0.0.0" port="8081" />
@@ -19,10 +20,11 @@ http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/m
     
 	<configuration-properties doc:name="Configuration properties" doc:id="b8e8ca78-e62d-42fd-8326-b270281c0675" file="config.yaml" />
 	<db:config name="Database_Config" doc:name="Database Config" doc:id="e551ba6a-8dc3-4149-8c73-48dde0b4159d" >
-		<db:my-sql-connection host="${db.host}" port="${db.port}" user="${db.user}" password="${db.password}" database="${db.database}" />
+		<db:my-sql-connection host="${secure::db.host}" port="${secure::db.port}" user="${secure::db.user}" password="${secure::db.password}" database="${secure::db.database}" />
 	</db:config>
 	<configuration doc:name="Configuration" doc:id="e0724bdc-c70c-47b2-a516-57a0bf913588" defaultErrorHandler-ref="globalError_Handler" />
 	<api-gateway:autodiscovery apiId="17864968" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="04e72880-8607-45ab-a21b-7d03767fd01b" flowRef="walmart-api-main" />
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="4220b2e5-d9f8-4d18-97d0-b7a705619162" file="config.yaml" key="you-cant-guess-1" />
 	<error-handler name="globalError_Handler" doc:id="e28cbf0a-b460-4c42-a891-b48e72790283" >
 		<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="842aa59f-eec9-4029-9c28-ffa1a05a1981" type="DB:BAD_SQL_SYNTAX, DB:CONNECTIVITY, DB:QUERY_EXECUTION">
 			<set-payload value="Database connection issue" doc:name="Set Payload" doc:id="cad5b13b-f3e0-4675-8322-e160ad847bf4" />
